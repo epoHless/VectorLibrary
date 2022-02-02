@@ -12,6 +12,7 @@ int main()
 
     sf::String string = "Weird font choice uh";
     sf::Font font;
+
     if (!font.loadFromFile("resources/fonts/Little Comet Demo Version.otf"))
     {
         printf("error!");
@@ -19,10 +20,11 @@ int main()
 
     sf::Text text(string, font, 50);
     text.setPosition(sf::Vector2f(0, window.getPosition().y / 2));
-    sf::Texture txt;
-    if (txt.loadFromFile("resources/texture/texture.jpg"));
+    sf::Texture texture;
+
+    if (texture.loadFromFile("resources/texture/texture.jpg"));
     {
-        shape.setTexture(&txt, false);
+        shape.setTexture(&texture, false);
     }
 
     rectangle.setFillColor(sf::Color::Red);
@@ -37,7 +39,7 @@ int main()
             if (event.type == sf::Event::Closed)
             {
                 window.close();
-                printf("goodbye!");
+                printf("goodbye!\n");
             }
 
 
@@ -64,7 +66,10 @@ int main()
         window.draw(text);
         window.draw(rectangle);
         window.draw(circle);
-
+        
+        
+        printf("X size: %f, Y size: %f\n", window.getView().getCenter().x, window.getView().getCenter().y);
+        
         circle.setRotation(circle.getRotation() + .1);
 
         if (shape.getSize().x <= window.getSize().x)
