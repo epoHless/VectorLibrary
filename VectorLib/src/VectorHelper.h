@@ -211,6 +211,12 @@ struct VECTOR_HELPER_API VectorFunc
 
 	#pragma endregion
 
+	static Vector cross_product(Vector vecA, Vector vecB) { 
+		return Vector((vecA[VectorAxis::AXIS_Y] * vecB[VectorAxis::AXIS_Z]) - (vecA[VectorAxis::AXIS_Z] * vecB[VectorAxis::AXIS_Y]),
+					(vecA[VectorAxis::AXIS_Z] * vecB[VectorAxis::AXIS_X]) - (vecA[VectorAxis::AXIS_X] * vecB[VectorAxis::AXIS_Z]),
+					(vecA[VectorAxis::AXIS_X] * vecB[VectorAxis::AXIS_Y]) - (vecA[VectorAxis::AXIS_Y] * vecB[VectorAxis::AXIS_X])
+		);
+	}
 	/// <summary>
 	/// Returns the dot product of vecA and vecB
 	/// </summary>
