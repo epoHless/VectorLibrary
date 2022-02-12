@@ -22,9 +22,6 @@ public:
 	Vector(const float x, const float y) : x(x), y(y), z(0) {}
 	Vector(const float xyz) : x(xyz), y(xyz), z(xyz) {}
 
-	static Vector zero() { return Vector(0, 0, 0); }
-	static Vector one() { return Vector(1, 1, 1); }
-
 	float operator[](const VectorAxis index)
 	{
 		if (index == static_cast<VectorAxis>(0)) return x;
@@ -134,7 +131,16 @@ private:
 
 struct VECTOR_HELPER_API VectorFunc
 {
+	static Vector vector_one() { return Vector(1, 1, 1); }
+	static Vector vector_zero() { return Vector(0, 0, 0); }
+	static Vector vector_up() { return Vector(0, 1, 0); }
+	static Vector vector_down() { return Vector(0, -1, 0); }
+	static Vector vector_right() { return Vector(1, 0, 0); }
+	static Vector vector_left() { return Vector(-1, 0, 0); }
+	static Vector vector_forward() { return Vector(0, 0, 1); }
+	static Vector vector_backwards() { return Vector(0, 0, -1); }
 	static Vector distance(Vector a, Vector b) { return a - b; }
+	static Vector is_higher(float a, float b) { return a > b; }
 };
 
 #endif VECTOR_HELPER_H
