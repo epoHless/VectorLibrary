@@ -7,6 +7,8 @@
 #define VECTOR_HELPER_API __declspec(dllimport)
 #endif
 
+#include <math.h>
+
 enum class VectorAxis : int
 {
 	AXIS_X = 0,
@@ -79,7 +81,7 @@ public:
 		z *= rhs.z;
 	}
 
-	Vector operator*(const Vector& rhs)
+	Vector& operator*(const Vector& rhs)
 	{
 		Vector temp = *this;
 		temp.x = x * rhs.x;
@@ -163,6 +165,9 @@ private:
 
 struct VECTOR_HELPER_API VectorFunc
 {
+
+	#pragma region Shorthand Functions
+
 	/// <summary>
 	/// Shorthand for writing (1,1,1)
 	/// </summary>
@@ -203,6 +208,11 @@ struct VECTOR_HELPER_API VectorFunc
 	/// </summary>
 	/// <returns></returns>
 	static Vector vector_backwards() { return Vector(0, 0, -1); }
+
+	#pragma endregion
+
+
+	static float magnitude(Vector vec) { return sqrt(static_cast<double>((pow(vec[VectorAxis::AXIS_X], 2) + (pow(vec[VectorAxis::AXIS_Y],2))))); }
 	/// <summary>
 	/// Calculate distance from vector A to vector B
 	/// </summary>
@@ -216,7 +226,7 @@ struct VECTOR_HELPER_API VectorFunc
 	/// <param name="a"></param>
 	/// <param name="b"></param>
 	/// <returns></returns>
-	static Vector is_higher(float a, float b) { return a > b; }
+	static bool is_higher(float a, float b) { return a > b; }
 };
 
 #endif VECTOR_HELPER_H
