@@ -1,73 +1,19 @@
-#include <SFML/Graphics.hpp>
-#include <string>
 #include <iostream>
+#include "VectorHelper.h"
 
-int main()
+int main() 
 {
-    sf::RenderWindow window(sf::VideoMode(500, 500), "Game Window");
-    sf::RectangleShape shape(sf::Vector2f(0, 30));
-    sf::RectangleShape rectangle(sf::Vector2f(0, 30));
+	Vector playerPos(20,20,20);
 
-    sf::CircleShape circle(200, 5);
+	playerPos;
 
-    sf::String string = "Window Implementation";
-    sf::Font font;
+	printf("Player x: %f, Player y: %f, Player z: %f",
+		static_cast<float>(playerPos[VectorAxis::AXIS_X]),
+		static_cast<float>(playerPos[VectorAxis::AXIS_Y]),
+		static_cast<float>(playerPos[VectorAxis::AXIS_Z])
+		);
 
-    if (!font.loadFromFile("resources/fonts/Little Comet Demo Version.otf"))
-    {
-        printf("error!");
-    }
+	system("pause");
 
-    sf::Text text(string, font, 50);
-    text.setPosition(sf::Vector2f(0, window.getPosition().y / 2));
-
-    rectangle.setFillColor(sf::Color::Red);
-    rectangle.setPosition(sf::Vector2f(shape.getSize().x, shape.getSize().y));
-
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-                printf("goodbye!\n");
-            }
-
-
-            if (event.type == sf::Event::KeyPressed)
-            {
-                printf("Key Pressed!\n");
-            }
-
-            if (event.type == sf::Event::Resized)
-                text.setPosition(sf::Vector2f(0, window.getPosition().y / 2));
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-            {
-                if (event.KeyPressed)
-                {
-                    printf("Key Pressed!\n");
-                }
-            }
-        }
-
-        window.clear();
-
-        window.draw(shape);
-        window.draw(text);
-        window.draw(rectangle);
-        
-        if (shape.getSize().x <= window.getSize().x)
-        {
-            shape.setSize(sf::Vector2f(shape.getSize().x + sf::Vector2f(.1, .1).x, shape.getSize().y));
-            rectangle.setSize(sf::Vector2f(rectangle.getSize().x + sf::Vector2f(.1, .1).x, rectangle.getSize().y));
-        }
-
-        window.display();
-    }
-
-    return 0;
+	return 0;
 }
