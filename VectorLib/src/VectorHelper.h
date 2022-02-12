@@ -49,6 +49,23 @@ public:
 		return temp;
 	}
 
+	void operator-=(const Vector rhs)
+	{
+		x -= rhs.x;
+		y -= rhs.y;
+		z -= rhs.z;
+	}
+
+	Vector operator-(const Vector& rhs)
+	{
+		Vector temp;
+		temp.x = x - rhs.x;
+		temp.y = y - rhs.y;
+		temp.z = z - rhs.z;
+
+		return temp;
+	}
+
 private:
 	float x;
 	float y;
