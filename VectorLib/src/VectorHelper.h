@@ -132,4 +132,9 @@ private:
 	float z;
 };
 
+struct VECTOR_HELPER_API VectorFunc
+{
+	static Vector distance(Vector a, Vector b) { return a - b; }
+};
+
 #endif VECTOR_HELPER_H
