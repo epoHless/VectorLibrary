@@ -43,7 +43,7 @@ public:
 
 	Vector operator+(const Vector& rhs)
 	{
-		Vector temp;
+		Vector temp = *this;
 		temp.x = x + rhs.x;
 		temp.y = y + rhs.y;
 		temp.z = z + rhs.z;
@@ -60,7 +60,7 @@ public:
 
 	Vector operator-(const Vector& rhs)
 	{
-		Vector temp;
+		Vector temp = *this;
 		temp.x = x - rhs.x;
 		temp.y = y - rhs.y;
 		temp.z = z - rhs.z;
@@ -77,7 +77,7 @@ public:
 
 	Vector operator*(const float rhs)
 	{
-		Vector temp;
+		Vector temp = *this;
 		temp.x = x * rhs;
 		temp.y = y * rhs;
 		temp.z = z * rhs;
@@ -93,7 +93,7 @@ public:
 
 	Vector operator/(const float rhs)
 	{
-		Vector temp;
+		Vector temp = *this;
 		temp.x = x / rhs;
 		temp.y = y / rhs;
 		temp.z = z / rhs;
