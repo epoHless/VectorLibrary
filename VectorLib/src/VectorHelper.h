@@ -100,6 +100,20 @@ public:
 		return temp;
 	}
 
+	Vector& operator--()
+	{
+		--x;
+		--y;
+		--z;
+		return *this;
+	}
+
+	Vector operator--(int)
+	{
+		Vector temp = *this;
+		operator--();
+		return temp;
+	}
 
 private:
 	float x;

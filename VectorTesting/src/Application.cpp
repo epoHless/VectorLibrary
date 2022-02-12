@@ -5,6 +5,8 @@ int main()
 {
 	Vector playerPos(20,20,20);
 
+	playerPos--;
+
 	printf("Player x: %f, Player y: %f, Player z: %f",
 		static_cast<float>(playerPos[VectorAxis::AXIS_X]),
 		static_cast<float>(playerPos[VectorAxis::AXIS_Y]),
