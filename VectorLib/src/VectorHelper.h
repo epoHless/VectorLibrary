@@ -32,11 +32,21 @@ public:
 		return 0.0f;
 	}
 
-	void operator+=(const Vector rValue)
+	void operator+=(const Vector rhs)
 	{
-		x += rValue.x;
-		y += rValue.y;
-		z += rValue.z;
+		x += rhs.x;
+		y += rhs.y;
+		z += rhs.z;
+	}
+
+	Vector operator+(const Vector& rhs)
+	{
+		Vector temp;
+		temp.x = x + rhs.x;
+		temp.y = y + rhs.y;
+		temp.z = z + rhs.z;
+
+		return temp;
 	}
 
 private:
