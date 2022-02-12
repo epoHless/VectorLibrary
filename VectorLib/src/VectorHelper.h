@@ -84,6 +84,21 @@ public:
 		return temp;
 	}
 
+	void operator/=(const float rhs)
+	{
+		x /= rhs;
+		y /= rhs;
+		z /= rhs;
+	}
+
+	Vector operator/(const float rhs)
+	{
+		Vector temp;
+		temp.x = x / rhs;
+		temp.y = y / rhs;
+		temp.z = z / rhs;
+		return temp;
+	}
 
 
 private:
