@@ -7,17 +7,18 @@ int main()
 	Vector enemyPos(5, 5, 5);
 
 	//Vector distance = VectorFunc::distance(playerPos, enemyPos);
-	Vector newPos(10, 39);
+	Vector vecA(-6, 8);
+	Vector vecB(5, 12);
 
 
 	printf("Player x: %f, Player y: %f, Player z: %f\n",
-		static_cast<float>(newPos[VectorAxis::AXIS_X]),
-		static_cast<float>(newPos[VectorAxis::AXIS_Y]),
-		static_cast<float>(newPos[VectorAxis::AXIS_Z])
+		static_cast<float>(vecA[VectorAxis::AXIS_X]),
+		static_cast<float>(vecA[VectorAxis::AXIS_Y]),
+		static_cast<float>(vecA[VectorAxis::AXIS_Z])
 		);
 
-	printf("The Magnitude is: %f\n",
-		VectorFunc::magnitude(newPos)
+	printf("The Dot product is: %f\n",
+		VectorFunc::dot_product(vecA, vecB)
 		);
 
 	system("pause");

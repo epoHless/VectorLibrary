@@ -211,7 +211,18 @@ struct VECTOR_HELPER_API VectorFunc
 
 	#pragma endregion
 
-
+	/// <summary>
+	/// Returns the dot product of vecA and vecB
+	/// </summary>
+	/// <param name="vecA"></param>
+	/// <param name="vecB"></param>
+	/// <returns></returns>
+	static float dot_product(Vector vecA, Vector vecB) { return ((vecA[VectorAxis::AXIS_X] * vecB[VectorAxis::AXIS_X]) + (vecA[VectorAxis::AXIS_Y] * vecB[VectorAxis::AXIS_Y]) + (vecA[VectorAxis::AXIS_Z] * vecB[VectorAxis::AXIS_Z])); }
+	/// <summary>
+	/// Calulate the lenght of the vector, return is the scalar of the vector
+	/// </summary>
+	/// <param name="vec">vector passed to calculate the lenght</param>
+	/// <returns></returns>
 	static float magnitude(Vector vec) { return sqrt(static_cast<double>((pow(vec[VectorAxis::AXIS_X], 2) + (pow(vec[VectorAxis::AXIS_Y],2))))); }
 	/// <summary>
 	/// Calculate distance from vector A to vector B
