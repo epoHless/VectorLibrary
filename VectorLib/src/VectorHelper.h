@@ -72,6 +72,22 @@ public:
 		z *= rhs;
 	}
 
+	void operator*=(const Vector rhs)
+	{
+		x *= rhs.x;
+		y *= rhs.y;
+		z *= rhs.z;
+	}
+
+	Vector operator*(const Vector& rhs)
+	{
+		Vector temp = *this;
+		temp.x = x * rhs.x;
+		temp.y = y * rhs.y;
+		temp.z = z * rhs.z;
+		return temp;
+	}
+
 	Vector operator*(const float rhs)
 	{
 		Vector temp = *this;
@@ -88,12 +104,28 @@ public:
 		z /= rhs;
 	}
 
+	void operator/=(const Vector rhs)
+	{
+		x /= rhs.x;
+		y /= rhs.y;
+		z /= rhs.z;
+	}
+
 	Vector operator/(const float rhs)
 	{
 		Vector temp = *this;
 		temp.x = x / rhs;
 		temp.y = y / rhs;
 		temp.z = z / rhs;
+		return temp;
+	}
+
+	Vector operator/(const Vector& rhs)
+	{
+		Vector temp = *this;
+		temp.x = x / rhs.x;
+		temp.y = y / rhs.y;
+		temp.z = z / rhs.z;
 		return temp;
 	}
 
@@ -131,15 +163,59 @@ private:
 
 struct VECTOR_HELPER_API VectorFunc
 {
+	/// <summary>
+	/// Shorthand for writing (1,1,1)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_one() { return Vector(1, 1, 1); }
+	/// <summary>
+	/// Shorthand for writing (0,0,0)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_zero() { return Vector(0, 0, 0); }
+	/// <summary>
+	/// Shorthand for writing (0,1,0)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_up() { return Vector(0, 1, 0); }
+	/// <summary>
+	/// Shorthand for writing (0,-1,0)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_down() { return Vector(0, -1, 0); }
+	/// <summary>
+	/// Shorthand for writing (1,0,0)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_right() { return Vector(1, 0, 0); }
+	/// <summary>
+	/// Shorthand for writing (-1,0,0)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_left() { return Vector(-1, 0, 0); }
+	/// <summary>
+	/// Shorthand for writing (0,0,1)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_forward() { return Vector(0, 0, 1); }
+	/// <summary>
+	/// Shorthand for writing (0,0,-1)
+	/// </summary>
+	/// <returns></returns>
 	static Vector vector_backwards() { return Vector(0, 0, -1); }
+	/// <summary>
+	/// Calculate distance from vector A to vector B
+	/// </summary>
+	/// <param name="a">Start vector</param>
+	/// <param name="b">End vector</param>
+	/// <returns></returns>
 	static Vector distance(Vector a, Vector b) { return a - b; }
+	/// <summary>
+	/// Returns true if a > b
+	/// </summary>
+	/// <param name="a"></param>
+	/// <param name="b"></param>
+	/// <returns></returns>
 	static Vector is_higher(float a, float b) { return a > b; }
 };
 
