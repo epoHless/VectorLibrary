@@ -102,9 +102,7 @@ public:
 
 	Vector& operator--()
 	{
-		--x;
-		--y;
-		--z;
+		--x;--y;--z;
 		return *this;
 	}
 
@@ -112,6 +110,19 @@ public:
 	{
 		Vector temp = *this;
 		operator--();
+		return temp;
+	}
+
+	Vector& operator++()
+	{
+		++x; ++y; ++z;
+		return *this;
+	}
+
+	Vector operator++(int)
+	{
+		Vector temp = *this;
+		operator++();
 		return temp;
 	}
 
