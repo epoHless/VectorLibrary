@@ -32,6 +32,13 @@ public:
 		return 0.0f;
 	}
 
+	void operator+=(const Vector rValue)
+	{
+		x += rValue.x;
+		y += rValue.y;
+		z += rValue.z;
+	}
+
 private:
 	float x;
 	float y;
