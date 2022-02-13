@@ -268,6 +268,32 @@ struct VECTOR_HELPER_API VectorConsole
 		SetConsoleTextAttribute(output, COLOR_WHITE);
 	};
 
+	static void print_vector_axis(Vector vector, VectorAxis axis)
+	{
+		void* output = GetStdHandle(STD_OUTPUT_HANDLE);
+
+		switch (axis)
+		{
+		case VectorAxis::AXIS_X:
+			SetConsoleTextAttribute(output, AXIS_X_COLOR);
+			std::cout << "X: " << vector[VectorAxis::AXIS_X] << std::endl;
+			SetConsoleTextAttribute(output, COLOR_WHITE);
+			break;
+		case VectorAxis::AXIS_Y:
+			SetConsoleTextAttribute(output, AXIS_Y_COLOR);
+			std::cout << "Y: " << vector[VectorAxis::AXIS_Y] << std::endl;
+			SetConsoleTextAttribute(output, COLOR_WHITE);
+			break;
+		case VectorAxis::AXIS_Z:
+			SetConsoleTextAttribute(output, AXIS_Z_COLOR);
+			std::cout << "Z: " << vector[VectorAxis::AXIS_Z] << std::endl;
+			SetConsoleTextAttribute(output, COLOR_WHITE);
+			break;
+		default:
+			break;
+		}
+	}
+
 };
 
 #endif VECTOR_HELPER_H
