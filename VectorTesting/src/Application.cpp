@@ -4,10 +4,7 @@
 
 int main() 
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-    
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Get Mouse Position");
     Vector mousePos(0,0,0);
 
     while (window.isOpen())
@@ -24,10 +21,8 @@ int main()
                 mousePos.y = sf::Mouse::getPosition().y - window.getPosition().y;
             }
         }
-
         VectorConsole::print_vector(mousePos);
         window.clear();
-        window.draw(shape);
         window.display();
     }
 
