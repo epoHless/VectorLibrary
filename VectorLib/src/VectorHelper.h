@@ -28,7 +28,7 @@ public:
 	Vector(const float x, const float y) : x(x), y(y), z(0) {}
 	Vector(const float xyz) : x(xyz), y(xyz), z(xyz) {}
 
-	float operator[](const VectorAxis index)
+	float operator[](VectorAxis index)
 	{
 		if (index == static_cast<VectorAxis>(0)) return x;
 		if (index == static_cast<VectorAxis>(1)) return y;
@@ -161,7 +161,7 @@ public:
 		return temp;
 	}
 
-private:
+
 	float x;
 	float y;
 	float z;

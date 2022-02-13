@@ -1,26 +1,37 @@
+#include "SFML/Graphics.hpp"
 #include <iostream>
 #include "VectorHelper.h"
 
 int main() 
 {
-	Vector playerPos(20,20,20);
-	Vector enemyPos(5, 5, 5);
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
+    
+    Vector mousePos(0,0,0);
 
-	Vector vecA(2,3,4);
-	Vector vecB(5,6,7);
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
 
-	Vector crossProd(VectorFunc::cross_product(vecA, vecB));
+            if (event.type == sf::Event::MouseMoved)
+            {
+                mousePos.x = sf::Mouse::getPosition().x - window.getPosition().x;
+                mousePos.y = sf::Mouse::getPosition().y - window.getPosition().y;
+            }
+        }
 
-	VectorConsole::print_vector(VectorFunc::distance(vecA, vecB));
-	//VectorConsole::print_vector_axis(vecA, VectorAxis::AXIS_Y);
+        VectorConsole::print_vector(mousePos);
+        window.clear();
+        window.draw(shape);
+        window.display();
+    }
 
-	/*printf("Player x: %f, Player y: %f, Player z: %f\n",
-		static_cast<float>(crossProd[VectorAxis::AXIS_X]),
-		static_cast<float>(crossProd[VectorAxis::AXIS_Y]),
-		static_cast<float>(crossProd[VectorAxis::AXIS_Z])
-		);*/
-	
-	system("pause");
+    return 0;
 
 	return 0;
 }
