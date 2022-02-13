@@ -11,8 +11,8 @@ int main()
 
 	Vector crossProd(VectorFunc::cross_product(vecA, vecB));
 
-	VectorConsole::print_vector(vecA);
-	VectorConsole::print_vector_axis(vecA, VectorAxis::AXIS_Y);
+	VectorConsole::print_vector(VectorFunc::distance(vecA, vecB));
+	//VectorConsole::print_vector_axis(vecA, VectorAxis::AXIS_Y);
 
 	/*printf("Player x: %f, Player y: %f, Player z: %f\n",
 		static_cast<float>(crossProd[VectorAxis::AXIS_X]),

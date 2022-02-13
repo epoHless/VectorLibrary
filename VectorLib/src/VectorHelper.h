@@ -215,6 +215,12 @@ struct VECTOR_HELPER_API VectorFunc
 
 	#pragma endregion
 
+	/// <summary>
+	/// Returns the cross product of vecA and vecB
+	/// </summary>
+	/// <param name="vecA"></param>
+	/// <param name="vecB"></param>
+	/// <returns></returns>
 	static Vector cross_product(Vector vecA, Vector vecB) { 
 		return Vector((vecA[VectorAxis::AXIS_Y] * vecB[VectorAxis::AXIS_Z]) - (vecA[VectorAxis::AXIS_Z] * vecB[VectorAxis::AXIS_Y]),
 					(vecA[VectorAxis::AXIS_Z] * vecB[VectorAxis::AXIS_X]) - (vecA[VectorAxis::AXIS_X] * vecB[VectorAxis::AXIS_Z]),
@@ -252,6 +258,10 @@ struct VECTOR_HELPER_API VectorFunc
 
 struct VECTOR_HELPER_API VectorConsole
 {
+	/// <summary>
+	/// Prints on screen the vector values
+	/// </summary>
+	/// <param name="vector"></param>
 	static void print_vector(Vector vector)
 	{
 		void* output = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -267,7 +277,11 @@ struct VECTOR_HELPER_API VectorConsole
 		std::cout << "Z: " << vector[VectorAxis::AXIS_Z] << std::endl;
 		SetConsoleTextAttribute(output, COLOR_WHITE);
 	};
-
+	/// <summary>
+	/// Prints on screen an axis of the given vector
+	/// </summary>
+	/// <param name="vector"></param>
+	/// <param name="axis"></param>
 	static void print_vector_axis(Vector vector, VectorAxis axis)
 	{
 		void* output = GetStdHandle(STD_OUTPUT_HANDLE);
