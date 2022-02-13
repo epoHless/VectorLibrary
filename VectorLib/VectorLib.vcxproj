@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ConsoleColors.h" />
     <ClInclude Include="src\VectorHelper.h" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,10 @@
 #endif
 
 #include <math.h>
+#include "ConsoleColors.h"
+#include <Windows.h>
+#include <string>
+#include <iostream>
 
 enum class VectorAxis : int
 {
@@ -214,7 +218,7 @@ struct VECTOR_HELPER_API VectorFunc
 	static Vector cross_product(Vector vecA, Vector vecB) { 
 		return Vector((vecA[VectorAxis::AXIS_Y] * vecB[VectorAxis::AXIS_Z]) - (vecA[VectorAxis::AXIS_Z] * vecB[VectorAxis::AXIS_Y]),
 					(vecA[VectorAxis::AXIS_Z] * vecB[VectorAxis::AXIS_X]) - (vecA[VectorAxis::AXIS_X] * vecB[VectorAxis::AXIS_Z]),
-					(vecA[VectorAxis::AXIS_X] * vecB[VectorAxis::AXIS_Y]) - (vecA[VectorAxis::AXIS_Y] * vecB[VectorAxis::AXIS_X])
+					(vecA[VectorAxis::AXIS_X] * vecB[VectorAxis::AXIS_Y]) - (vecA[VectorAxis::AXIS_Y] * vecB[VectorAxis::AXIS_Z])
 		);
 	}
 	/// <summary>
@@ -236,7 +240,7 @@ struct VECTOR_HELPER_API VectorFunc
 	/// <param name="a">Start vector</param>
 	/// <param name="b">End vector</param>
 	/// <returns></returns>
-	static Vector distance(Vector a, Vector b) { return a - b; }
+	static Vector distance(Vector origin, Vector destination) { return destination - origin; }
 	/// <summary>
 	/// Returns true if a > b
 	/// </summary>
@@ -244,6 +248,26 @@ struct VECTOR_HELPER_API VectorFunc
 	/// <param name="b"></param>
 	/// <returns></returns>
 	static bool is_higher(float a, float b) { return a > b; }
+};
+
+struct VECTOR_HELPER_API VectorConsole
+{
+	static void print_vector(Vector vector)
+	{
+		void* output = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(output, AXIS_X_COLOR);
+		std::cout << "X: " << vector[VectorAxis::AXIS_X];
+		SetConsoleTextAttribute(output, COLOR_WHITE);
+		std::cout << " | ";
+		SetConsoleTextAttribute(output, AXIS_Y_COLOR);
+		std::cout << "Y: " << vector[VectorAxis::AXIS_Y];
+		SetConsoleTextAttribute(output, COLOR_WHITE);
+		std::cout << " | ";
+		SetConsoleTextAttribute(output, AXIS_Z_COLOR);
+		std::cout << "Z: " << vector[VectorAxis::AXIS_Z] << std::endl;
+		SetConsoleTextAttribute(output, COLOR_WHITE);
+	};
+
 };
 
 #endif VECTOR_HELPER_H
