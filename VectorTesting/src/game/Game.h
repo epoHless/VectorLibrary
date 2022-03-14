@@ -38,6 +38,7 @@ private:
 	sf::Text tx_mousePosX;
 	sf::Text tx_mousePosY;
 	sf::Text tx_lives;
+	sf::Text tx_clicks;
 
 	//Utilities
 	sf::Vector2f mousePosView;
@@ -47,10 +48,17 @@ private:
 	std::string yString;
 
 	//Game logic
+	bool mouseHeld;
+
 	float spawnTimer;
 	float spawnTimerMax;
-	int maxEnemies;
-	int lives = 3;
+
+	unsigned maxEnemies;
+
+	unsigned lives = 3;
+
+	float clicks = 1;
+	float targetClicks = 1;
 
 	//Gameobjects
 	std::vector<sf::CircleShape> enemies;

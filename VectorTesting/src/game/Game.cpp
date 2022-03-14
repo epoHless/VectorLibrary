@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include <iomanip>
 
 Game::Game()
 {
@@ -35,18 +36,19 @@ void Game::pollEvents()
             xString = "X: " + std::to_string(mousePos[VectorAxis::AXIS_X]);
             yString = "Y: " + std::to_string(mousePos[VectorAxis::AXIS_Y]);
 
-            VectorConsole::print_vector(mousePos);
+            //VectorConsole::print_vector(mousePos);
             break;
         case sf::Event::KeyPressed:
             if (this->ev.key.code == sf::Keyboard::Escape)
                 this->window->close();
             break;
-
         default:
             break;
         }
 	}
 }
+
+#pragma region Updates
 
 void Game::update()
 {
@@ -70,12 +72,22 @@ void Game::updateEnemies()
     
 }
 
+void Game::updateMousePosition()
+{
+    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
+    this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
+}
+
+#pragma endregion
+
+#pragma region Renders
+
 void Game::render()
 {
     this->window->clear();
  
     this->renderUI();
-    this->renderMouse();
+    //this->renderMouse();
     this->renderEnemies();
 
     this->window->display();
@@ -84,7 +96,7 @@ void Game::render()
 void Game::renderUI()
 {
     this->window->draw(tx_lives);
-
+    this->window->draw(tx_clicks);
 }
 
 void Game::renderEnemies()
@@ -94,8 +106,11 @@ void Game::renderEnemies()
         this->window->draw(this->enemies[i]);
 
         //Check if clicked on
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        
+        /*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
+            this->clicks++;
+
             if (this->enemies[i].getGlobalBounds().contains(this->mousePosView))
             {
                 if (enemies[i].getPointCount() < 10 )
@@ -103,10 +118,18 @@ void Game::renderEnemies()
                     this->lives--;
                     tx_lives.setString("Lives: " + std::to_string(this->lives));
                 }
+                else
+                {
+                    this->targetClicks++;
+                }
                 this->enemies.erase(this->enemies.begin() + i);
                 break;
             }
-        }
+
+            this->tx_clicks.setString("Accuracy: " + std::to_string((this->targetClicks / this->clicks) * 100));
+
+            std::cout << clicks << " , " << targetClicks << std::endl;
+        }*/
 
         enemies[i].setScale(enemies[i].getScale().x - 0.003, enemies[i].getScale().y - 0.003);
 
@@ -115,6 +138,40 @@ void Game::renderEnemies()
             this->enemies.erase(this->enemies.begin() + i);
         }
     }
+
+    
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        if (!this->mouseHeld)
+        {
+            this->mouseHeld = true;
+            bool deleted = false;
+            this->clicks++;
+
+            for (size_t i = 0; i < this->enemies.size() && deleted == false; i++)
+            {
+                if (this->enemies[i].getGlobalBounds().contains(this->mousePosView))
+                {
+                    if (enemies[i].getPointCount() < 10)
+                    {
+                        this->lives--;
+                        tx_lives.setString("Lives: " + std::to_string(this->lives));
+                    }
+                    else
+                        this->targetClicks++;
+
+
+                    deleted = true;
+                    this->enemies.erase(this->enemies.begin() + i);
+                    break;
+                }
+            }
+
+            this->tx_clicks.setString("Accuracy: " + std::to_string(static_cast<int>((this->targetClicks / this->clicks) * 100)));
+        }
+    }
+    else this->mouseHeld = false;
+    
 }
 
 void Game::renderMouse()
@@ -125,6 +182,10 @@ void Game::renderMouse()
     this->window->draw(tx_mousePosY);
 }
 
+#pragma endregion
+
+#pragma region Inits
+
 void Game::initVariables()
 {
 	this->window = nullptr;
@@ -133,16 +194,24 @@ void Game::initVariables()
 
     initText(this->tx_mousePosX, sf::Color::Red, this->font);
     this->tx_mousePosX.setPosition(sf::Vector2f(10, 10));
+
     initText(this->tx_mousePosY, sf::Color::Green, this->font);
     this->tx_mousePosY.setPosition(sf::Vector2f(10, 25));
-    initText(this->tx_lives, sf::Color::Yellow, this->font);
-    this->tx_lives.setPosition(sf::Vector2f(900, 10));
 
-    tx_lives.setString("Lives: " + std::to_string(this->lives));
+    initText(this->tx_lives, sf::Color::Yellow, this->font);
+    this->tx_lives.setPosition(sf::Vector2f(10, 10));
+
+    initText(this->tx_clicks, sf::Color::Yellow, this->font);
+    this->tx_clicks.setPosition(sf::Vector2f(10, 25));
+
+    this->tx_lives.setString("Lives: " + std::to_string(this->lives));
+    this->tx_clicks.setString("Accuracy: " + std::to_string(static_cast<int>((this->targetClicks / this->clicks) * 100)));
+    
 
     this->spawnTimerMax = 1000.f;
     this->spawnTimer = this->spawnTimerMax;
     this->maxEnemies = 10;
+    this->mouseHeld = false;
 }
 
 void Game::initWindow()
@@ -168,6 +237,8 @@ void Game::initFont(const char* path)
     }
 }
 
+#pragma endregion
+
 void Game::SpawnGameobject()
 {
     int rand = Utilities::Random(100);
@@ -184,8 +255,4 @@ void Game::SpawnGameobject()
     }    
 }
 
-void Game::updateMousePosition()
-{
-    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
-    this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
-}
+

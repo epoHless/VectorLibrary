@@ -14,12 +14,11 @@ GameManager* GameManager::GetInstance()
 void GameManager::Run()
 {
 	Game game;
-	Vector mousePos(0, 0, 0);
+	//Vector mousePos(0, 0, 0);
 
 	while (game.running())
 	{
 		game.update();
-
 		game.render();
 	}
 }
